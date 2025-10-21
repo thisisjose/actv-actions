@@ -45,4 +45,4 @@ jobs:
 
       - name: Mensaje final con emoji
         run: |
-          echo "Workflow completado exitosamente"
+          echo "🚀 Workflow completado exitosamente 🚀"

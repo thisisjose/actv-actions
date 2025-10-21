@@ -1,0 +1,48 @@
+name: Hola DevOps
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+    inputs:
+      mensaje:
+        description: 'Mensaje personalizado'
+        required: false
+        default: 'Hola DevOps'
+
+jobs:
+  saludar:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout del repositorio
+        uses: actions/checkout@v4
+
+      - name: Imprimir mensaje de bienvenida
+        run: |
+          MENSAJE='${{ github.event.inputs.mensaje }}'
+          if [ -z "$MENSAJE" ] || [ "$MENSAJE" = "null" ]; then
+            MENSAJE='¡Hola DevOps!'
+          fi
+          AUTOR="Tu Nombre"
+          echo "$MENSAJE"
+          echo "Creado por: $AUTOR"
+
+      - name: Mostrar información del sistema
+        run: |
+          echo "=== Información del Sistema ==="
+          echo "Usuario: $(whoami)"
+          echo "Directorio actual: $(pwd)"
+          echo "Fecha y hora: $(date)"
+          # lsb_release puede no estar instalado siempre; lo comprobamos
+          if command -v lsb_release >/dev/null 2>&1; then
+            lsb_release -d
+          else
+            cat /etc/os-release || true
+          fi
+
+      - name: Mensaje final con emoji
+        run: |
+          echo "Workflow completado exitosamente"

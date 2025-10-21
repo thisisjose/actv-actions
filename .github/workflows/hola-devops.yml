@@ -26,7 +26,7 @@ jobs:
           if [ -z "$MENSAJE" ] || [ "$MENSAJE" = "null" ]; then
             MENSAJE='¡Hola DevOps!'
           fi
-          AUTOR="Tu Nombre"
+          AUTOR="José Valenzuela"
           echo "$MENSAJE"
           echo "Creado por: $AUTOR"
 
